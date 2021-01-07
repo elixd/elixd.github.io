@@ -1,0 +1,16 @@
+current directory: /Users/ilya/github/elixd.github.io/docs/vendor/bundle/ruby/3.0.0/gems/racc-1.5.2/ext/racc/cparse
+/opt/homebrew/opt/ruby/bin/ruby -I /opt/homebrew/Cellar/ruby/3.0.0_1/lib/ruby/3.0.0 -r ./siteconf20210107-71476-c9rvij.rb extconf.rb
+checking for rb_ary_subseq()... yes
+creating Makefile
+
+current directory: /Users/ilya/github/elixd.github.io/docs/vendor/bundle/ruby/3.0.0/gems/racc-1.5.2/ext/racc/cparse
+make "DESTDIR=" clean
+
+current directory: /Users/ilya/github/elixd.github.io/docs/vendor/bundle/ruby/3.0.0/gems/racc-1.5.2/ext/racc/cparse
+make "DESTDIR="
+compiling cparse.c
+linking shared-object racc/cparse.bundle
+
+current directory: /Users/ilya/github/elixd.github.io/docs/vendor/bundle/ruby/3.0.0/gems/racc-1.5.2/ext/racc/cparse
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cparse.bundle ./.gem.20210107-71476-zbxn3j/racc
