@@ -1,3 +1,8 @@
+---
+title: Home
+layout: default
+---
+
 This is my tech blog
 
 <form action="/search.html" method="get">
