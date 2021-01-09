@@ -3,8 +3,10 @@ layout: page
 description: "Blog about Tech"
 ---
 
+<!----------- List all Posts ------------>
 {% for post in paginator.posts %}
 <div class="post-preview">
+    <!-- 1. post Title and Subtitle linked to Post URL -->
     <a href="{{ post.url | prepend: site.baseurl }}">
         <h2 class="post-title">
             {{ post.title }}
@@ -14,20 +16,29 @@ description: "Blog about Tech"
             {{ post.subtitle }}
         </h3>
         {% endif %}
-        <div class="post-content-preview">
-            {% if post.lang == 'en' %}
-                {{ post.content | strip_html | truncate:300 }}
-            {% else %}
-                {{ post.content | strip_html | truncate:200 }}
-            {% endif %}
-        </div>
     </a>
+        
+    <!-- 2. post Content -->
+    <div class="post-content">
+        <!-- stripped posts -->
+        {% if post.lang == 'en' %}
+            {{ post.content | strip_html | truncate:300 }}
+        {% else %}
+        <!-- not stripped posts -->
+            {{ post.content }}
+        {% endif %}
+    </div>
+    
+    <!-- 3. post Meta -->
     <p class="post-meta">
         Posted by {% if post.author %}{{ post.author }}{% else %}{{ site.title }}{% endif %} on {{ post.date | date: "%B %-d, %Y" }}
     </p>
+    
 </div>
 <hr>
 {% endfor %}
+
+
 
 <!-- Pager -->
 {% if paginator.total_pages > 1 %}

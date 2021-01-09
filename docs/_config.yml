@@ -2,7 +2,7 @@
 title: Tech Blog
 SEOTitle: Tech Blog
 header-img: img/home-bg.jpg
-#email: huxpro@gmail.com
+#email: some-email
 description: "This is based on notes to self about technical issues"
 keyword: "Tech Blog, Web, Python, ZFS, Proxmox"
 url: "https://elixd.github.io"              # your host, for absolute URL
@@ -13,11 +13,11 @@ future: true
 
 # SNS settings
 RSS: false
-#weibo_username:     huxpro
-#zhihu_username:     huxpro
-github_username:    elixd
-#twitter_username:   huxpro
-#facebook_username:  huxpro
+#weibo_username:     user
+#zhihu_username:     user
+github_username:     elixd
+#twitter_username:   user
+#facebook_username:  user
 #linkedin_username:  firstname-lastname-idxxxx
 
 
@@ -58,7 +58,7 @@ kramdown:
 
 
 # Disqus settings
-disqus_username: elixd
+disqus_username: elixd-github-io
 
 # Netease settings
 netease_comment: false
