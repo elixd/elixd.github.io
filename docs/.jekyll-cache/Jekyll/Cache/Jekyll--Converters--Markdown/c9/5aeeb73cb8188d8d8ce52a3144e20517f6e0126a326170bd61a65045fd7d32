@@ -1,0 +1,9 @@
+I"�<p>```
+sudo apt update
+sudo apt -y upgrade
+sudo apt -y install xfce4 xfce4-goodies xorg chromium-browser
+sudo apt -y install xrdp
+sudo systemctl enable xrdp
+sudo echo ‘exec startxfce4’ » /etc/xrdp/xrdp.ini
+sudo systemctl restart xrdp</p>
+:ET

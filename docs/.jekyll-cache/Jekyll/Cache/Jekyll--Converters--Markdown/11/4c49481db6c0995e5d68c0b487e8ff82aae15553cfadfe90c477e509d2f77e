@@ -1,0 +1,5 @@
+I"x<p>```
+#Install Postgresql</p>
+<h1 id="set-russian-locale">Set Russian Locale</h1>
+<p>dpkg-reconfigure locales</p>
+:ET
