@@ -24,8 +24,8 @@ description: "Blog about Tech"
         {% if post.lang == 'en' %}
             {{ post.content | strip_html | truncate:300 }}
         {% else %}
-        <!-- not stripped posts -->
-            {{ post.content }}
+        <!-- stripped posts -->
+            {{ post.content | strip_html | truncate:300 }}
         {% endif %}
     </div>
     
