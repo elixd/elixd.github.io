@@ -1,0 +1,45 @@
+I"@
+<p>Assuming you have shared the windows folder to local nerwork.</p>
+
+<p>To permanently mount Samba folder into Linux Machine located on the same network. You need:</p>
+
+<h3 id="prepare">Prepare</h3>
+
+<p>1.Install CIFS drivers in Linux</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo apt install -y cifs-utils
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>2. Creare mount point</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo mkdir /media/samba
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="mount-the-share">Mount the Share</h3>
+
+<h4 id="add-mount-config-to-fstab-permanent-mount">Add mount config to fstab (Permanent Mount)</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo nano /etc/fstab
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Add this line to the fstab file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>//&lt;ip addresss of windows machine&gt;/&lt;share name&gt; /media/samba cifs user=&lt;user&gt;,pass=&lt;password&gt;,nofail 0 0
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>That’s it, not just mount it by running:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo mount -a
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="temporary-mount">Temporary Mount</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>mount -t cifs -o username=&lt;username&gt;,pass=&lt;password&gt;,iocharset=utf8,rw,nounix //192.168.0.7/D$ /media/samba
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

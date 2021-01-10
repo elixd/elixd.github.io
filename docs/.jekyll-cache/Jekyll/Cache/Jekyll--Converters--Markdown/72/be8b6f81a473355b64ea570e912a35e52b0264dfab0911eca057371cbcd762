@@ -1,0 +1,67 @@
+I"�<p><strong>Исходные данные:</strong> есть 2 маршрутизатора, обеспечивающие доступ в интернет для двух отдельных локальных сетей. Например между 2мя офисами:</p>
+
+<ul>
+  <li>Офис 1. LAN1: 192.168.0.0/24</li>
+  <li>Офис 2. LAN2: 192.168.2.0/24</li>
+</ul>
+
+<p><strong>Задача:</strong> обеспечить связь локальных сетей так, чтобы из одной сети можно было “дозвониться” до клиентов другой сети.</p>
+
+<h3 id="1-настроить-мост">1) Настроить мост</h3>
+
+<h4 id="на-роутере-сервере-офис1">На роутере-сервере (офис1):</h4>
+
+<p>Включить L2TP сервер</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/interface l2tp-server server set enabled=yes
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Добавить PPP профиль, который будет использоваться в свойствах учетной записи:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/ppp profile add name=l2tp-bridge only-one=yes use-encryption=yes
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Добавим учетную запись:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/ppp secret add name=office2 password=yourpassword local-address=192.168.20.1 remote-address=192.168.20.2 service=l2tp profile=l2tp-bridge
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Local-address - это адрес, назначается серверу, а remote-address клиенту. Примечание: адреса должны быть в подсети отличной от LAN1 и LAN2</p>
+
+<p>Создадим интерфейс:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/interface l2tp-server add name=l2tp-in-office2 user=office2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="настройки-на-роутере-клиенте-офис2">Настройки на роутере-клиенте (офис2)</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/interface l2tp-client add name=l2tp-out-office1 connect-to=&lt;IP address&gt; user=office2 password=yourpassword allow=mschap2 disabled=no 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="2-настроить-маршруты">2) Настроить маршруты</h3>
+
+<p>Они нужны для того, чтобы клиенты одной сети могли обращаться к клиентам другой сети.</p>
+
+<p>На первом маршрутизаторе:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/ip route add dst-address=192.168.2.0/24 gateway=192.168.20.2 pref-src=192.168.0.1 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>На втором:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/ip route add dst-address=192.168.0.0/24 gateway=192.168.20.1 pref-src=192.168.2.1 
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>dst-address - маска удаленной сети (за VPNом)</li>
+  <li>gateway - шлюз доступа к этой сети (VPN адрес удаленного роутера)</li>
+  <li>pref-src - адрес откуда будут идти запросы (локальный адрес маршрутизатора)</li>
+</ul>
+:ET

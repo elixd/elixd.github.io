@@ -1,0 +1,17 @@
+I"�<h3 id="alternative-to-using-jupiter-notebooks-on-a-mac">Alternative to using Jupiter Notebooks on a Mac</h3>
+
+<h4 id="ms-code">MS Code</h4>
+
+<ul>
+  <li>One option is using .ipynb format (Jupiter inside Code)</li>
+  <li>Another option of using normal .py files, but with “# %%” the code block (and running with CRTL+ENTER)</li>
+</ul>
+
+<p>Here are the details: <a href="https://pbpython.com/notebook-alternative.html">https://pbpython.com/notebook-alternative.html</a></p>
+
+<h4 id="pinapple">Pinapple</h4>
+
+<p>All in one native app for Mac, Jupiter replacement.</p>
+
+<p><a href="https://nwhitehead.github.io/pineapple/">https://nwhitehead.github.io/pineapple/</a></p>
+:ET

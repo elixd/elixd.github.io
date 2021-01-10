@@ -1,0 +1,28 @@
+I"q<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre># To install the app:
+sudo apt update
+apt install fpc
+
+# To prevent "Can't find unit system" error:
+sudo ln -s /usr/lib/x86_64-linux-gnu/fpc /usr/lib/fpc
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Done.</p>
+
+<p>Now run, the editor:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>fp
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>To complie an app from source code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>fpc hello_world.pas
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

@@ -1,0 +1,44 @@
+I"Š<h2 id="backup">Backup</h2>
+
+<p>Backup files:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>cp -r /var/www/techblog.dudan.ru/var/www/techblog.dudan.ru.backup
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="update">Update</h2>
+
+<h3 id="option-1-manual-update">Option 1. Manual Update.</h3>
+
+<p>Download latest Wordpress archive and unzip it:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>wget https://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Sync new files to the the web site folder:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>rsync -avh --progress wordpress/ techblog.dudan.ru/
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="option-2-update-using-wp-cli">Option 2. Update using wp-cli</h3>
+
+<p>Install wp-cli:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Run update:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>wp core update --path=/var/www/techblog.dudan.ru
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

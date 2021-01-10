@@ -1,0 +1,31 @@
+I"�<h3 id="move-data-directory">Move Data Directory</h3>
+
+<p><a href="https://help.nextcloud.com/t/howto-change-move-data-directory-after-installation/17170">https://help.nextcloud.com/t/howto-change-move-data-directory-after-installation/17170</a></p>
+
+<h3 id="tools">Tools</h3>
+
+<p>Fix permissions</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>chown -R www-data:www-data /var/www/nextcloud
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Scan for file changes</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo -u www-data php /var/www/nextcloud/occ files:scan --all
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h4 id="resolving-file-locks">Resolving file locks</h4>
+
+<p>For anyone having issues with files getting lock while using redis on nextcloud pi. Specially while syncing nodejs apps…</p>
+
+<ol>
+  <li>Connect to your redis<br />
+ sudo redis-cli -s /var/run/redis/redis.sock</li>
+  <li>authenticate in your redis with the password for redis found in /var/www/nextcloud/config/config.php<br />
+ $&gt; auth “yourpasswordfoundinconfig.php”<br />
+ $&gt; flushall<br />
+ Your locked files should synchronize now</li>
+</ol>
+:ET

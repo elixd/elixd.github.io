@@ -1,0 +1,12 @@
+I"<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+</pre></td><td class="rouge-code"><pre>useradd -m username # is to create home dir
+passwd username 
+usermod -aG sudo username #add user to sudoers
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>#Edit /etc/passwd and make sure thing in your userline is /bin/bash and not /bin/sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+:ET

@@ -1,0 +1,74 @@
+I"¦<h3 id="install">Install</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo apt-get install modsecurity-crs libapache2-mod-security2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Check if it was added to Apache</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo apachectl -M | grep security
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h3 id="configure">Configure</h3>
+
+<p>Copy the default configuration:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo cp /etc/modsecurity/modsecurity.conf-recommended /etc/modsecurity/modsecurity.conf
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Enable ModSecurity:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>sudo nano /etc/modsecurity/modsecurity.conf
+SecRuleEngine On # change this setting to On
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Enable for Apache virtual host(s):</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo nano /etc/apache2/sites-available/000-default.conf
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>At the bottom of the file, just above the tag, add the following lines:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>SecRuleEngine On
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<hr />
+
+<h3 id="addition-information">Addition information</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre># Apache configuration file, where modsecurity config is added
+/etc/apache2/mods-enabled/security2.conf
+
+# Place where modsecurity rules are stored:
+/usr/share/modsecurity-crs/rules/*.conf
+
+# Test if it's working
+yoursite_address/?exec=/bin/bash
+
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><a href="https://www.linode.com/docs/web-servers/apache-tips-and-tricks/configure-modsecurity-on-apache/">https://www.linode.com/docs/web-servers/apache-tips-and-tricks/configure-modsecurity-on-apache/</a></p>
+
+<h3 id="exceptions-whitelisting">Exceptions, Whitelisting</h3>
+
+<p><a href="https://www.jasonkingstudios.com/blog/apache-mod_security-whitelisting-wordpress/">https://www.jasonkingstudios.com/blog/apache-mod_security-whitelisting-wordpress/</a></p>
+
+<p><a href="https://jpmrblood.github.io/apache2/tips/wordpress/modsecurity-wordpress/">https://jpmrblood.github.io/apache2/tips/wordpress/modsecurity-wordpress/</a></p>
+
+<p><a href="https://www.liquidweb.com/kb/whitelisting-in-modsec/">https://www.liquidweb.com/kb/whitelisting-in-modsec/</a></p>
+:ET

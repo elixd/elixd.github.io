@@ -1,0 +1,30 @@
+I"‹<h3 id="1-firewall-allow-requests-to-ports-80-and-443">1. Firewall: allow requests to ports 80 and 443</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>/ip firewall filter
+add action=accept chain=forward dst-port=80 in-interface=ether1 protocol=tcp comment="allow requests to port 80 to be forwarded (to web server)"
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Repeat for port 443 if needed</p>
+
+<h3 id="2-configure-nat">2. Configure NAT</h3>
+
+<h4 id="configure-port-forwarding-from-web-to-the-lan-server">Configure port forwarding from WEB to the LAN server:</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>/ip firewall nat add chain=dstnat in-interface=ether1 protocol=tcp dst-port=80 action=dst-nat to-addresses=192.168.0.9 to-ports=80 comment="forward from wan to web server port 80"
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Do the same for 443 port if needed</p>
+
+<h4 id="configure-address-substitution-explained-here">Configure address substitution (explained <a href="https://wiki.mikrotik.com/wiki/Hairpin_NAT">here</a>):</h4>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>/ip firewall nat
+add chain=srcnat src-address=192.168.0.0/24 dst-address=192.168.0.9 protocol=tcp dst-port=80 out-interface=ether1 action=masquerade
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Do the same for 443 port if needed</p>
+:ET

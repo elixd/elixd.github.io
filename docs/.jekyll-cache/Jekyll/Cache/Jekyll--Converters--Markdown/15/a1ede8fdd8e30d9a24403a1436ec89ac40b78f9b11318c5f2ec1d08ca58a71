@@ -1,0 +1,40 @@
+I"Ò<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre># Setup Docker container with data stored on external volumes and HTTPS port (443) forwarded to port 44443:
+sudo docker run -i -t -d -p 44443:443 --restart=always \
+    -v /app/onlyoffice/DocumentServer/logs:/var/log/onlyoffice  \
+    -v /app/onlyoffice/DocumentServer/data:/var/www/onlyoffice/Data  \
+    -v /app/onlyoffice/DocumentServer/lib:/var/lib/onlyoffice \
+    -v /app/onlyoffice/DocumentServer/db:/var/lib/postgresql  onlyoffice/documentserver
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre># Generate and copy certificates
+openssl genrsa -out onlyoffice.key 2048
+openssl req -new -key onlyoffice.key -out onlyoffice.csr
+openssl x509 -req -days 365 -in onlyoffice.csr -signkey onlyoffice.key -out onlyoffice.crt
+openssl dhparam -out dhparam.pem 2048
+
+mkdir -p /app/onlyoffice/DocumentServer/data/certs
+cp onlyoffice.key /app/onlyoffice/DocumentServer/data/certs/
+cp onlyoffice.crt /app/onlyoffice/DocumentServer/data/certs/
+cp dhparam.pem /app/onlyoffice/DocumentServer/data/certs/
+chmod 400 /app/onlyoffice/DocumentServer/data/certs/onlyoffice.key
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>This <a href="https://www.linuxbabe.com/ubuntu/integrate-nextcloud-onlyoffice">article</a> also offers a good guidance</p>
+:ET

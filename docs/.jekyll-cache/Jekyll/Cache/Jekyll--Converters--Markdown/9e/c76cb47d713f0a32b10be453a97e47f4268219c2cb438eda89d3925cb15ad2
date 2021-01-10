@@ -1,0 +1,76 @@
+I"û	<p>Here is a simple script to install docker on Debian 9</p>
+
+<ol>
+  <li>Create the script text file with nano</li>
+</ol>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo nano install_docker.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>2. Copy this code to the file and save it</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre></td><td class="rouge-code"><pre>#!/bin/bash 
+# Run this script to install Docker on Debian 9
+
+#Install prerequisites
+sudo apt update
+sudo apt --yes install apt-transport-https ca-certificates curl gnupg2 software-properties-common
+
+# Add the GPG key for the official Docker repository to your system:
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+
+# Add the Docker repository:
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/debian $(lsb_release -cs) stable"
+
+# Istall Docker
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+#Install docker-compose
+sudo curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+echo "---------------- INSTALLATION FINISHED ---------------"
+
+# Check docker status
+sudo systemctl status docker
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>3. Make it executable:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>chmod +x install_docker.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>4. Run the script</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>sudo ./install_docker.sh
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>P.S. it might work on other systems aside fro Debian 9, but tested on Debian 9. This script is intended to simplify Docker setup in case I need it in the future.</p>
+:ET
