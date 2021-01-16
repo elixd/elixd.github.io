@@ -55,6 +55,8 @@ Copy this code into the script:
 To backup DATA\_DIR to BACKUP\_DIR at 3am every night, add this to your cron file:
 
 
+dfdf
+
 	# BACKUP SCRITPS
 	# WHEN       SCRIPT DIR                    DATA_DIR     BACKUP_DIR
 	0 4 1 * *  /usr/local/scripts/backup.sh  /data/dir/  /backup/dir
@@ -66,10 +68,6 @@ To backup DATA\_DIR to BACKUP\_DIR at 3am every night, add this to your cron fil
 	# | | --------- Day of month (1 - 31)
 	# | ----------- Hour (0 - 23)
 	# ------------- Minute (0 - 59).  
-
-	
-	fsf
-	dfdf
 
 
 

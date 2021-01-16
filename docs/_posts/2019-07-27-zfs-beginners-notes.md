@@ -72,6 +72,10 @@ zfs get dedup tank
 zpool list
 ```
 
+
+
+
+
 ### Snapshots
 
 ```
