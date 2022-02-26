@@ -14,8 +14,10 @@ FFmpeg options:
 -c:a copy        # copy audio without re-encoding
 -c:a aac         # convert audio to AAC
 -c:v libaom-av1  # video in AV format
--qscale:v N      # Video Quality: N = 1..31 (1 is highest quality)
--qscale:v N      # Audio Quality: N = 1..31 (1 is highest quality)
+--crf N          # libx264 Video Quality: N = 0..51 (0 is highest quality) default = 23, recommended = 18-28
+--crf N          # libx265 Video Quality: N = 0..51 (0 is highest quality) default = 28, recommended = 24-34
+-qscale:v N      # NOT RECOMMENDED TO USE (use -crf) Video Quality: N = 1..31 (1 is highest quality)
+-qscale:a N      # Audio Quality: N = 1..31 (1 is highest quality)
 -strict -2       # turn on experimental features 
 ```
 
