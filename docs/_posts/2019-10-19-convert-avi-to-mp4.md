@@ -33,6 +33,12 @@ Convert AVI to MP4 - folder with sub-directories:
 find . -name "*.avi" -exec sh -c 'f="{}"; ffmpeg -i "$f" "${f%.avi}.mp4"' \;
 ```
 
+#### Choose Audio Track
+"map" option is used to map video and aduio stream
+```
+-map 0:v -map 0:a:1  # Convert only second audio track
+<no option>          # only first audio track will be encoded
+```
 ### Links
 
 [https://unix.stackexchange.com/questions/35746/encode-with-ffmpeg-using-avi-to-mp4](https://unix.stackexchange.com/questions/35746/encode-with-ffmpeg-using-avi-to-mp4)
