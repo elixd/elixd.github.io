@@ -5,6 +5,9 @@ description: "Blog about Tech"
 
 <script src="https://unpkg.com/lunr/lunr.js"></script>
 
+<input type="text" id="search-input" placeholder="Search...">
+<div id="search-results"></div>
+
 <!----------- List all Posts ------------>
 {% for post in paginator.posts %}
 <div class="post-preview">
