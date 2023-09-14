@@ -8,6 +8,40 @@ description: "Blog about Tech"
 <input type="text" id="search-input" placeholder="Search...">
 <div id="search-results"></div>
 
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var searchInput = document.getElementById("search-input");
+    var searchResults = document.getElementById("search-results");
+
+    var index, store;
+    fetch("/docs/search.json")
+        .then(response => response.json())
+        .then(data => {
+            store = data;
+            index = lunr(function() {
+                this.ref("url");
+                this.field("title");
+                this.field("content");
+
+                store.forEach(function(doc) {
+                    this.add(doc);
+                }, this);
+            });
+        });
+
+    searchInput.addEventListener("keyup", function() {
+        var query = this.value;
+        var results = index.search(query);
+        searchResults.innerHTML = "";
+        results.forEach(function(result) {
+            var item = store.filter(i => i.url === result.ref)[0];
+            searchResults.innerHTML += `<a href="${item.url}">${item.title}</a><br>`;
+        });
+    });
+});
+</script>
+
+
 <!----------- List all Posts ------------>
 {% for post in paginator.posts %}
 <div class="post-preview">
